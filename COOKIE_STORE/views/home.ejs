@@ -31,16 +31,20 @@
             </button>
           </form>
         <% } %>
+        <% if(logged === false){ %>
         <form method="get" action="https://localhost:1024/login">
           <button class="logo">
             login
           </button>
         </form>
+        <% } %>
+        <% if(logged === true){ %>
         <form method="get" action="https://localhost:1024/logout">
           <button class="logo">
             logout
           </button>
         </form>
+        <% } %>
       </div>
     </header>
     <div class="searchbar">

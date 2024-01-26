@@ -10,6 +10,26 @@ var database_user = {
     }
 }
 
+async function update_productname(id, name) {
+    var user_pool = new mssql.ConnectionPool( database_user )
+    await user_pool.connect()
+    var request = new mssql.Request( user_pool )
+    request.input('id', id)
+    request.input('name', name)
+    var result = await request.query( 'UPDATE PRODUCTDATA SET NAME=@name WHERE ID=@id' )
+    await user_pool.close()
+}
+
+async function update_productprice(id, price) {
+    var user_pool = new mssql.ConnectionPool( database_user )
+    await user_pool.connect()
+    var request = new mssql.Request( user_pool )
+    request.input('id', id)
+    request.input('price', price)
+    var result = await request.query( 'UPDATE PRODUCTDATA SET PRICE=@price WHERE ID=@id' )
+    await user_pool.close()
+}
+
 async function get_userdata(column, user_desc, data = '*') {
     var user_pool = new mssql.ConnectionPool(database_user)
     await user_pool.connect()
@@ -73,18 +93,6 @@ async function delete_data(table, id) {
     await user_pool.close()
 }
 
-async function check_if_id_exists(id) {
-    var result = await get_productdata("ID", id, "ID")
-    console.log(result[0]['ID'])
-
-    if (result[0]['ID'] == id) {
-        return true
-    } else {
-        return false
-    }
-}
-
-
 async function get_productdata(column, product_desc, data = '*') {
     var user_pool = new mssql.ConnectionPool(database_user)
     await user_pool.connect()
@@ -132,16 +140,28 @@ async function save_user_info(username, password) {
     await database.set_userdata({ name: username, psswrd: hash_password })
 }
 
+async function check_if_id_exists(id) {
+    var user_pool = new mssql.ConnectionPool(database_user)
+    await user_pool.connect()
+    var request = new mssql.Request(user_pool)
+    request.input('id', id)
+    var result = await request.query('SELECT COUNT(*) AS res FROM PRODUCTDATA WHERE ID=@id')
+    await user_pool.close()
+    return result.recordset[0].res == 1
+}
+
 module.exports = {
     get_productdata: get_productdata,
     get_userdata: get_userdata,
     set_productdata: set_productdata,
     set_userdata: set_userdata,
     get_products: get_products,
-    check_if_id_exists: check_if_id_exists,
     delete_data: delete_data,
     add_to_user_cart: add_to_user_cart,
     get_user_cart: get_user_cart,
-    save_user_info: save_user_info
+    save_user_info: save_user_info,
+    update_productname: update_productname,
+    update_productprice: update_productprice,
+    check_if_id_exists: check_if_id_exists
 };
 

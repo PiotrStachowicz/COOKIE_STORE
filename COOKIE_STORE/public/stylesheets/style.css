@@ -10,15 +10,17 @@
 .manage {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  max-width: 2000px;
+  flex-wrap: wrap;
 }
 
-.manage>* {
-  margin: 50px;
+.manage > *{
+  margin: 25px;
 }
 
-.goback {
+.goback{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,15 +41,14 @@
   align-items: center;
 }
 
-.right-section>* {
+.right-section > * {
   margin-right: 10px;
 }
-
-body {
+body { 
   background-color: #0e1111;
 }
 
-.products {
+.products{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -58,11 +59,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.products>* {
+.products > *{
   margin: 5px;
 }
 
-.product {
+.product{
   display: flex;
   flex-direction: column;
 }
@@ -70,22 +71,20 @@ body {
 
 .logo {
   font-size: 18px;
-  color: #e1e1e1;
+  color: #ececec;
   font-family: inherit;
   font-weight: 800;
-  cursor: pointer;
   position: relative;
   border: none;
   background: none;
   text-transform: uppercase;
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
   transition-property: color;
 }
 
 .username {
   font-size: 18px;
-  color: #e1e1e1;
+  color: #ececec;
   font-family: inherit;
   font-weight: 800;
   cursor: pointer;
@@ -125,7 +124,7 @@ body {
   position: relative;
   width: 11.875em;
   height: 16.5em;
-  box-shadow: 0px 1px 13px rgba(0.1, 0.1, 0.1, 0.1);
+  box-shadow: 0px 1px 13px rgba(0.1,0.1,0.1,0.1);
   cursor: pointer;
   transition: all 120ms;
   display: flex;
@@ -186,15 +185,15 @@ body {
   transform: translateX(-0.5em) translateY(-0.5em);
   border: 1px solid #171717;
   box-shadow: 10px 10px 0px #9d00ff;
-}
+ }
 
-.loginpage {
+ .loginpage{
   display: flex;
   align-items: center;
   flex-direction: column;
-}
+ }
 
-.form {
+ .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -240,6 +239,6 @@ body {
 
 .form .btn:hover {
   box-shadow: 6px 6px 0px #9d00ff,
-    -3px -3px 10px;
+             -3px -3px 10px;
   transform: translateX(-0.5em) translateY(-0.5em);
 }

@@ -25,6 +25,24 @@
         </form>
         <a class="username"> <%=message2 %> </a>
       </div>
+      <div>
+        <form class="form" method="post" action="https://localhost:1024/manage?type=update-name">
+          <a class="heading">update name</a>
+            <input class="input" name="id" placeholder="id">
+            <input class="input" name="name" placeholder="name">
+            <button class="btn">update</button>
+        </form>
+        <a class="username"> <%=message3 %> </a>
+      </div>
+      <div>
+        <form class="form" method="post" action="https://localhost:1024/manage?type=update-price">
+          <a class="heading">update price</a>
+            <input class="input" name="id" placeholder="id">
+            <input class="input" name="price" placeholder="price">
+            <button class="btn">update</button>
+        </form>
+        <a class="username"> <%=message4 %> </a>
+      </div>
     </div>
     <div>
       <form method="post" action="https://localhost:1024/">

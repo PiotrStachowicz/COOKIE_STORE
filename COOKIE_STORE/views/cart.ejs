@@ -19,9 +19,20 @@
                     <%    count++ %>
                     <% } %>
                 <% }) %>
-                <div>
-                    <a class="username"><%= item.NAME %> x <%= count%></a>
-                    <a class="username"><%= (+item.PRICE)*(count) %>$</a>
+                <div class="cart-item">
+                    <span class="username"><%= item.NAME %> x <%= count %></span>
+                    <span class="username"><%= (+item.PRICE)*(count) %>$</span>
+                    
+                    <form method="post" action="https://localhost:1024/cart" class="modify-form">
+                        <input type="hidden" name="productID" value="<%= item.ID %>">
+                        <input type="hidden" name="action" value="add">
+                        <button type="submit">+</button>
+                    </form>
+                    <form method="post" action="https://localhost:1024/cart" class="modify-form">
+                        <input type="hidden" name="productID" value="<%= item.ID %>">
+                        <input type="hidden" name="action" value="remove">
+                        <button type="submit">-</button>
+                    </form>
                 </div>
                 <% sum += (+item.PRICE)*count %>
             <% } %>

@@ -38,6 +38,13 @@
             <% } %>
         <% } %>
         <a class="username">sum is <%= sum %></a>
+        <% if(sum > 0) { %>
+        <form method="get" action="https://localhost:1024/order">
+            <button class="logo">
+                place order
+            </button>
+        </form>
+        <% } %>
         <form method="get" action="https://localhost:1024/">
             <button class="logo">
               go back

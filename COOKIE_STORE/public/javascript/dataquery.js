@@ -161,6 +161,36 @@ async function check_if_id_exists(id) {
     return result.recordset[0].res == 1
 }
 
+async function get_order_id() {
+    var user_pool = new mssql.ConnectionPool(database_user)
+    await user_pool.connect()
+    var request = new mssql.Request(user_pool)
+    var result = await request.query('SELECT NEXT VALUE FOR order_id AS res')
+    await user_pool.close()
+    return result.recordset[0].res
+}
+
+
+async function add_order(id, user_id, cart) {
+    var user_pool = new mssql.ConnectionPool(database_user)
+    await user_pool.connect()
+    var request = new mssql.Request(user_pool)
+    const query = 'SELECT * FROM CART WHERE USER_ID = @user_id'
+    request.input('user_id', mssql.Int, user_id);
+    const result = await request.query(query)
+    for (r of result.recordset) {
+        await request.query(`INSERT INTO [ORDER] (ID, USER_ID, PRODUCT_ID, COMPLETED) VALUES (${id},${user_id},${r['PRODUCT_ID']},0)`)
+    }
+    await user_pool.close()
+}
+
+async function delete_cart(user_id) {
+    var user_pool = new mssql.ConnectionPool(database_user)
+    await user_pool.connect()
+    var request = new mssql.Request(user_pool)
+    await request.query(`DELETE FROM CART WHERE USER_ID=${user_id}`)
+}
+
 module.exports = {
     get_productdata: get_productdata,
     get_userdata: get_userdata,
@@ -174,7 +204,10 @@ module.exports = {
     update_productname: update_productname,
     update_productprice: update_productprice,
     check_if_id_exists: check_if_id_exists,
-    delete_from_user_cart: delete_from_user_cart
+    delete_from_user_cart: delete_from_user_cart,
+    get_order_id: get_order_id,
+    add_order: add_order,
+    delete_cart: delete_cart
 };
 
 

@@ -1,10 +1,10 @@
 const mssql = require('mssql')
 
 var database_user = {
-    user: 'foo',
-    password: 'foo',
+    user: 'sa',
+    password: 'Jakub123@',
     server: 'localhost',
-    database: 'Proj',
+    database: 'projekt',
     options: {
         trustServerCertificate: true
     }
@@ -106,11 +106,12 @@ async function get_productdata(column, product_desc, data = '*') {
     return data
 }
 
-async function get_products() {
+async function get_products(searchTerm) {
     var user_pool = new mssql.ConnectionPool(database_user)
     await user_pool.connect()
     var request = new mssql.Request(user_pool)
-    var result = await request.query(`SELECT * FROM PRODUCTDATA`)
+    request.input('searchTerm', searchTerm)
+    var result = await request.query('SELECT * FROM PRODUCTDATA WHERE NAME LIKE @searchTerm')
     await user_pool.close()
     data = []
     result.recordset.forEach(r => {
@@ -164,4 +165,5 @@ module.exports = {
     update_productprice: update_productprice,
     check_if_id_exists: check_if_id_exists
 };
+
 

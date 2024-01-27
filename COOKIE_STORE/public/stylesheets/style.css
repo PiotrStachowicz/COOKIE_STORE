@@ -16,6 +16,15 @@
   flex-wrap: wrap;
 }
 
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .cart-item {
   display: flex;
   align-items: center;

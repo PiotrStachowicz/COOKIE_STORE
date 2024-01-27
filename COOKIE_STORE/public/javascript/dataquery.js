@@ -81,6 +81,16 @@ async function add_to_user_cart(user_id, product_id) {
     }
 }
 
+async function delete_from_user_cart(user_id, product_id) {
+    var user_pool = new mssql.ConnectionPool(database_user)
+    await user_pool.connect()
+    var request = new mssql.Request(user_pool)
+    request.input('user_id', user_id)
+    request.input('product_id', product_id)
+    await request.query('DELETE TOP(1) FROM CART WHERE PRODUCT_ID=@product_id AND USER_ID=@user_id')
+    user_pool.close()
+}
+
 async function delete_data(table, id) {
     var user_pool = new mssql.ConnectionPool(database_user)
     await user_pool.connect()
@@ -163,7 +173,8 @@ module.exports = {
     save_user_info: save_user_info,
     update_productname: update_productname,
     update_productprice: update_productprice,
-    check_if_id_exists: check_if_id_exists
+    check_if_id_exists: check_if_id_exists,
+    delete_from_user_cart: delete_from_user_cart
 };
 
 

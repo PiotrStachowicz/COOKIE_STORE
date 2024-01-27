@@ -16,6 +16,17 @@
   flex-wrap: wrap;
 }
 
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.username, .modify-form {
+  margin-right: 10px;
+}
+
+
 .manage > *{
   margin: 25px;
 }

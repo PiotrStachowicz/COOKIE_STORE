@@ -9,6 +9,7 @@ let logout_router = require('./routes/logout_page')
 let cart_router = require('./routes/cart_page')
 let manage_router = require('./routes/manage_page')
 let register_router = require('./routes/register_page')
+let order_router = require('./routes/order_page')
 let app = express()
 
 // view engine setup
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // middlewear
 app.use(express.urlencoded({ extended: true }))
-app.use(cookie_parser('vnjk@vn2321#$djavdnjo11231'))
+app.use(cookie_parser("vnjk@vn2321#$djavdnjo11231"))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // user routing 
@@ -28,12 +29,14 @@ app.use('/logout', logout_router)
 app.use('/cart', cart_router)
 app.use('/manage', manage_router)
 app.use('/register', register_router)
+app.use('/order', order_router)
+
 
 
 
 // error handling
-app.use(function (err, req, res, next) {
-  res.render('error', { message: err.message, id: err.status || 500 })
+app.use(function(err, req, res, next) {
+  res.render('error', {message: err.message, id: err.status || 500})
 })
 
 

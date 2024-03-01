@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title> cookie store </title>
+</head>
+<body>
+    <div class="cart">
+        <a class="username"> Lista użytkowników: </a>
+        <% for(const user of list){ %>
+          <div>
+            <a class="username"> <%= user.NAME %> </a>
+          </div>
+        <% } %>
+      </div>
+      <div class="cart">
+        <form method="post" action="https://localhost:1024/">
+            <button class="logo">go back</button>
+        </form>
+      </div>
+</body>
+</html>

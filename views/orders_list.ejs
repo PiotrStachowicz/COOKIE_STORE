@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title> cookie store </title>
+</head>
+<body>
+  <div class="cart">
+    <a class="username"> Lista zamówień: </a>
+  </div>
+    <div class="orders">
+        <% for(const order of list){ %>
+          <div class="form">
+            <a class="username"> ORDER ID:  <%= order.ID %>:  </a>
+            <a class="username"> PRODUCT ID:  <%= order.PRODUCT_ID %>  </a>
+            <a class="username"> USER ID: <%= order.USER_ID %>  </a>
+            <a class="username"> STATUS: <%= order.COMPLETED %>  </a>
+            <form method="post" action="https://localhost:1024/orders_list" class="modify-form">
+              <input type="hidden" name="ID" value="<%= order.ID %>">
+              <input type="hidden" name="action" value="fulfill">
+              <button type="submit">change status</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+      <div class="cart">
+        <form method="post" action="https://localhost:1024/">
+            <button class="logo">go back</button>
+        </form>
+      </div>
+</body>
+</html>

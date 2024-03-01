@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title> cookie store </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <script>
+    
+  </script>
+  <body>
+    <header class="UpperBar">
+      <form method="get" action="https://localhost:1024">
+        <button class="logo">
+          cookie store
+        </button>
+      </form>
+      <form method="get" action="https://localhost:1024">
+          <input type="text" name="searchTerm" placeholder="Enter search term">
+          <button type="submit">Search</button>
+      </form>
+      <div class="right-section">
+        <a class="username"> <%= username %> </a> 
+        <form method="get" action="https://localhost:1024/cart">
+            <button class="logo">
+              cart
+            </button>
+        </form>
+        <% if(logged === true){ %>
+        <% } %>
+        <% if(admin === true){ %>
+          <form method="get" action="https://localhost:1024/manage">
+            <button class="logo">
+              manage
+            </button>
+          </form>
+        <% } %>
+        <% if(logged === false){ %>
+        <form method="get" action="https://localhost:1024/login">
+          <button class="logo">
+            login
+          </button>
+        </form>
+        <% } %>
+        <% if(logged === true){ %>
+        <form method="get" action="https://localhost:1024/logout">
+          <button class="logo">
+            logout
+          </button>
+        </form>
+        <% } %>
+      </div>
+    </header>
+    <div class="products">
+      <% for(const product of products){ %>
+        <form method="post" action="/?id=<%=product.ID%>">
+          <button class="card">
+            <div class="text"><%= product.NAME %></div>
+            <div class="price"><%= product.PRICE %>$</div>
+          </button>
+        </form>
+      <% } %>
+    </div>
+  </body>
+</html>
